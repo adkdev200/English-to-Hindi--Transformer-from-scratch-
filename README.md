@@ -1,43 +1,44 @@
-# Transformer from Scratch: English to Hindi Translator 🚀
+# Transformer from Scratch: English to Hindi Translation
 
-Hey there! Welcome to my project where I built a Transformer model entirely from scratch using PyTorch. 
+This repository contains a complete, ground-up implementation of the original Transformer architecture described in the paper *"Attention Is All You Need"* (Vaswani et al., 2017), built entirely in PyTorch. 
 
-If you've ever wanted to look under the hood of how modern AI language models work, this is a great place to start. Instead of relying on pre-built libraries like HuggingFace that abstract away all the math, I wanted to build the actual architecture described in the famous *"Attention Is All You Need"* paper, block by block.
+The primary objective of this project is to develop a deep, practical understanding of modern sequence-to-sequence language models. By avoiding high-level abstractions provided by libraries like HuggingFace, this project manually constructs the core mathematical and structural components of the network. The resulting model is configured and trained specifically for English-to-Hindi translation.
 
-## What's inside?
+## Architecture Highlights
 
-This repository contains everything you need to train and run an English to Hindi language translation model:
+The core logic of the model is implemented directly from the paper's specifications. Key components include:
 
-- `transformer_scratch.py`: The heart of the project. This is where you'll find the raw PyTorch implementation of the Transformer. It includes the Encoder, Decoder, Multi-Head Attention blocks, Positional Encodings, and Feed-Forward layers—all built from the ground up.
-- `train.ipynb`: A Jupyter Notebook walking you through the training process. 
-- `inference.ipynb`: A notebook to test out the trained model and see it translate English sentences into Hindi.
+- **Attention Mechanisms**: Custom implementations of scaled dot-product attention and multi-head attention blocks.
+- **Encoder-Decoder Stacks**: Full implementation of both the encoder and decoder layers, including the cross-attention mechanisms necessary for sequence generation.
+- **Positional Encodings**: Manual calculation of sine and cosine positional embeddings to inject sequence order information into the input embeddings.
+- **Feed-Forward Networks**: Position-wise feed-forward networks implemented within each residual attention block.
 
-## Why did I build this?
+## Project Structure
 
-Honestly? To learn. It's one thing to import a model and use `.generate()`, but it's a completely different beast to write the matrix multiplications and attention mechanisms yourself. I wanted to deeply understand how information flows through the Self-Attention mechanisms and the Encoder-Decoder attention layers. By focusing on an English to Hindi translation task, I was able to test the model on a real-world, complex sequence-to-sequence problem.
+- `transformer_scratch.py`: The core architectural implementation. This file contains all custom PyTorch `nn.Module` classes (e.g., `EncoderBlock`, `MultiHeadAttentionBlock`, `LayerNormalization`).
+- `train.ipynb`: A comprehensive training pipeline, covering dataset preprocessing, tokenization, and the training loop required to optimize the model on English-Hindi translation pairs.
+- `inference.ipynb`: An evaluation notebook demonstrating how to load trained weights and perform inference to translate new English sentences into Hindi.
 
 ## Getting Started
 
-1. **Clone the repo:**
+1. **Clone the repository:**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/adkdev200-ops/English-to-Hindi--Transformer-from-scratch-.git
    cd "Language Translator"
    ```
 
-2. **Check out the code:**
-   I highly recommend opening `transformer_scratch.py` first. I've broken down the classes (like `MultiHeadAttentionBlock` and `EncoderBlock`) to make it as readable and understandable as possible.
+2. **Explore the Implementation:**
+   I recommend reviewing `transformer_scratch.py` first to see how the mathematical formulations from the paper translate into PyTorch tensors and matrix operations.
 
-3. **Train it yourself:**
-   Fire up `train.ipynb` and follow along to train the model on the English-Hindi dataset. Note: Training from scratch takes a good amount of computing power, so a GPU is highly recommended!
+3. **Training the Model:**
+   To train the model locally, follow the steps in `train.ipynb`. Please note that training a Transformer architecture from scratch is computationally intensive; a CUDA-enabled GPU is strongly advised.
 
-4. **Run some translations:**
-   Once you have a `model.pt` saved, open up `inference.ipynb` to try out your own translations. 
+4. **Running Inference:**
+   Once training is complete, use `inference.ipynb` to load your generated `model.pt` weights and execute translations.
 
-## Stuff to note
+## Technical Notes
 
-- The trained model weights (`model.pt`) and `__pycache__` directories are deliberately ignored in Git because they are huge/unnecessary. You'll generate your own weights during training!
-- The dataset used for English-Hindi translation needs to be pre-processed before training (as seen in the notebooks). 
+- **Model Weights**: The trained model weights (`model.pt`) and local Python cache files (`__pycache__`) are excluded from version control to maintain a clean and lightweight repository. You will generate your own model weights locally during the training pipeline.
+- **Data Preparation**: The raw text data requires preprocessing and tokenization using the logic provided in the notebooks before it can be processed by the model.
 
-Feel free to fork this, play around with the hyperparameters, or use it as a learning resource to build your own Transformers. If you spot any bugs or have suggestions, pull requests are always welcome!
-
-Happy coding! ✨
+Feel free to use this repository as a technical reference for your own learning, or fork it to experiment with architectural modifications.
